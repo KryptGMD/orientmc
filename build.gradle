@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+}
+
+group 'me.danterus'
+version '1.0-SNAPSHOT'
+
+
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    implementation 'com.github.Minestom:Minestom:2b8beadd3e'
+    implementation 'org.json:json:20220924'
+}
+
+jar {
+    manifest {
+        attributes "Main-Class": "me.danterus.orientmc.Main"
+    }
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
